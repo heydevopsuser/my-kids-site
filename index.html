@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,17 +6,49 @@
   <style>
     body { font-family: Arial; text-align: center; background: #f0f8ff; padding: 20px; }
     h1 { color: #2e8b57; }
-    img { max-width: 300px; margin: 10px; }
-    button { padding: 10px; margin-top: 20px; }
+    img { max-width: 300px; margin: 10px; border-radius: 10px; }
+    button { padding: 10px; margin: 10px; background-color: #ff69b4; border: none; border-radius: 5px; color: white; cursor: pointer; }
+    button:hover { background-color: #ff1493; }
+    canvas { border: 2px solid #333; margin-top: 20px; }
   </style>
 </head>
 <body>
-  <h1>Welcome to Arjun's WebSite!</h1>
+  <h1>Welcome to Arjun's Website!</h1>
   <p>This website talks about Arjun's evolution with lot of ❤️  and fun together with his Mom, Dad and the family!</p>
   
-  <img src="fun-image.jpeg" alt="Fun Image">
+  <img src="fun-image.jpeg" alt="Fun Image 1">
+  <img src="fun-image2.jpeg" alt="Fun Image 2">
+  <img src="fun-image3.jpeg" alt="Fun Image 3">
+
   <br>
-  <button onclick="alert('Hi there! 👋')">Click Me!</button>
+  <button onclick="alert(' Thanks for boarding on my bus! 🚌 The trip is just starting — stay tuned for more fun stops, pictures, and surprises!! 👋')">Click Me!</button>
+
+  <h2>🎨 Draw Something!</h2>
+  <canvas id="draw" width="400" height="300"></canvas>
+  <br>
+  <button onclick="clearCanvas()">Clear Drawing</button>
+
+  <script>
+    const canvas = document.getElementById('draw');
+    const ctx = canvas.getContext('2d');
+    let drawing = false;
+
+    canvas.addEventListener('mousedown', () => drawing = true);
+    canvas.addEventListener('mouseup', () => drawing = false);
+    canvas.addEventListener('mouseout', () => drawing = false);
+
+    canvas.addEventListener('mousemove', (e) => {
+      if (!drawing) return;
+      const rect = canvas.getBoundingClientRect();
+      ctx.fillStyle = '#000';
+      ctx.beginPath();
+      ctx.arc(e.clientX - rect.left, e.clientY - rect.top, 3, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    function clearCanvas() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+  </script>
 </body>
 </html>
-
